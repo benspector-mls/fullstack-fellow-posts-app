@@ -1,3 +1,7 @@
+# Refactoring the Fellow Tracker
+
+## Part 1 - Adding a DB for the fellows
+
 1. create a database called `fellow-tracker-f23`
 2. Create the table structure
 
@@ -31,8 +35,17 @@
 
 8.  Refactor `Fellow.js`!
     1. Import `knex` into the `Fellow` model
-    2.  Remove the import of the `getId` function
-    3.  Remove the `Fellow.#all` array
-    4.  Remove the `constructor` entirely and create a `static async create` method (we'll use the constructor for another purpose)
-    5.  All functions need to be `async` to use `await knex.raw()`
+    2. Remove the import of the `getId` function
+    3. Remove the `Fellow.#all` array
+    4. Remove the `constructor` entirely and create a `static async create` method (we'll use the constructor for another purpose)
+    5. All functions need to be `async` to use `await knex.raw()`
+    6. Every function needs to return *something* (use `RETURNING *`)
+       1. Create should return the new fellow
+       2. Get ALL should return an array of all fellows
+       3. Get One should return a single fellow object (the first object in the `rows` array)
+       4. Update should return the updated fellow object
+       5. Delete should return the deleted fellow object
 9.  Refactor `fellowControllers.js` to use the new model methods and to `await` everything
+
+
+## Part 2 - Adding posts
